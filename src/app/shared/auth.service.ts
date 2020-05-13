@@ -10,7 +10,7 @@ import {tap} from 'rxjs/operators';
 })
 export class AuthService {
 
-  isAuthenticated$ = new BehaviorSubject<boolean>(false);
+  isAuthenticated$ = new BehaviorSubject<boolean>(!!this.token);
 
   constructor(
     private http: HttpClient
@@ -20,7 +20,7 @@ export class AuthService {
     return this.http.post<IUser>(
       `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.apiKey}`, user)
       .pipe(
-        tap((response) => this.setToken(response))
+        tap(response => this.setToken(response))
       )
   }
 
@@ -31,15 +31,14 @@ export class AuthService {
       localStorage.setItem('fb-token', response.idToken);
       this.isAuthenticated$.next(true);
     } else {
-      this.isAuthenticated$.next(false);
       localStorage.clear();
+      this.isAuthenticated$.next(false);
     }
   }
 
-  get token () {
+  get token() {
     const expDate = new Date(localStorage.getItem('fb-token-exp'));
     if (new Date > expDate) {
-      this.logout();
       return null;
     }
     return localStorage.getItem('fb-token')
@@ -48,5 +47,6 @@ export class AuthService {
   logout() {
     this.setToken(null);
   }
+
 
 }

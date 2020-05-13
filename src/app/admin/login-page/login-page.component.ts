@@ -12,6 +12,7 @@ import {Router} from '@angular/router';
 export class LoginPageComponent implements OnInit {
   form: FormGroup;
   submitted = false;
+
   constructor(
     private auth: AuthService,
     private router: Router
@@ -49,8 +50,6 @@ export class LoginPageComponent implements OnInit {
       this.submitted = false;
       throw error;
     });
-
-
   }
 
 }

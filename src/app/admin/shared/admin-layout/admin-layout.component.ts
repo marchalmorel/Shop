@@ -8,13 +8,17 @@ import {Router} from '@angular/router';
   styleUrls: ['./admin-layout.component.scss']
 })
 export class AdminLayoutComponent implements OnInit {
+  isAuthenticated = false;
 
   constructor(
     private auth: AuthService,
     private router: Router
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.auth.isAuthenticated$.subscribe(value => {
+      this.isAuthenticated = value
+    });
   }
 
   logout(event) {
