@@ -4,4 +4,16 @@
     justify-content: flex-end;
     align-items: center;
   }
+
+  h2 {
+    margin-bottom: .5rem;
+  }
+}
+
+.flex {
+  display: flex;
+}
+
+.item {
+  width: 50%;
 }

@@ -12,7 +12,8 @@ export interface IProduct {
   photo: string,
   info: string,
   price: number,
-  date: Date
+  date: Date,
+  id?: string
 }
 
 export interface IFbResponse {

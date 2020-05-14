@@ -43,7 +43,7 @@ export class ProductService {
   }
 
   //todo типизация
-  getById(id: number): Observable<IProduct> {
+  getById(id: string): Observable<IProduct> {
     return this.http.get<IProduct>(`${environment.fbDbUrl}/products/${id}.json`)
       .pipe(
         map( (res: IProduct) => {
@@ -54,6 +54,16 @@ export class ProductService {
             }
         })
       )
+  }
+
+  //todo типизация
+  remove(id: string): Observable<IProduct> {
+    return this.http.delete<IProduct>(`${environment.fbDbUrl}/products/${id}.json`)
+  }
+
+  //todo типизация
+  update(product: IProduct) {
+    return this.http.patch(`${environment.fbDbUrl}/products/${product.id}.json`, product)
   }
 
 
